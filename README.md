@@ -4,37 +4,76 @@
 ![ADAS](https://img.shields.io/badge/ADAS-Automotive-red)
 ![Computer Vision](https://img.shields.io/badge/Computer%20Vision-Perception-purple)
 ![Road Safety](https://img.shields.io/badge/Road-Safety-success)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen) 
+![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
+![Tests](https://img.shields.io/badge/Tests-Pytest-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 # InstaSafe AI
 
-Real-time road safety monitoring using YOLOv8 and centroid tracking. Detects dangerous driving behaviour — sudden movements, lane cuts, collision risks, and wrong-direction travel — and overlays live alerts on the video feed.
+Real-time road safety monitoring using YOLOv8 and centroid tracking. Detects dangerous driving behaviour, sudden movements, lane cuts, collision risks, and wrong-direction travel while providing live alerts and risk assessment.
 
-[![GitHub](https://img.shields.io/badge/GitHub-YOUR_USERNAME%2Finsta-safe-blue?logo=github)](https://github.com/YOUR_USERNAME/insta-safe)
+---
 
-## What it does
+## Overview
 
-- Tracks vehicles and pedestrians frame by frame using centroid-based tracking
-- Analyses each object's trajectory for speed, acceleration, instability, and sudden changes
-- Detects lane cuts, pedestrian crossings, and wrong-direction movement
-- Predicts collision risk by projecting future positions
-- Scores overall scene chaos and displays a live alert panel
+InstaSafe AI is an intelligent road safety monitoring system designed to improve traffic awareness through computer vision and AI. The system processes live video streams, tracks vehicles and pedestrians, predicts potential risks, and generates real-time alerts.
+
+### Key Features
+
+- Real-time object detection using YOLOv8
+- Vehicle and pedestrian tracking
+- Collision risk prediction
+- Lane cut detection
+- Wrong direction detection
+- Pedestrian crossing analysis
+- Scene chaos scoring
+- Live alert dashboard
+- Real-time risk monitoring
+- Lightweight and fast processing
+
+---
+
+## Technologies Used
+
+- Python 3.10+
+- YOLOv8
+- OpenCV
+- NumPy
+- Ultralytics
+- Computer Vision
+- AI-Based Risk Assessment
+- ADAS Concepts
+
+---
 
 ## Requirements
 
 - Python 3.10+
-- A webcam or video file
+- Webcam or Video Input
+- Windows / Linux / macOS
+
+---
 
 ## Installation
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/vishal9519-vis/insta-safe.git
 cd insta-safe
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-The YOLOv8 nano model (`yolov8n.pt`) downloads automatically on first run if it is not already in the `models/` folder.
+The YOLOv8 Nano model (`yolov8n.pt`) will automatically download during the first execution if it is not already available.
 
-## Running
+---
+
+## Running the Project
 
 ```bash
 python main.py
@@ -42,52 +81,194 @@ python main.py
 
 Press **Q** to quit.
 
+---
+
+## Running Tests
+
+Execute all tests:
+
+```bash
+pytest
+```
+
+Install pytest if required:
+
+```bash
+pip install pytest
+pytest
+```
+
+Run a specific test file:
+
+```bash
+pytest tests/test_tracker.py
+```
+
+---
+
 ## Configuration
 
-All settings are in `config/config.py`:
+All configuration parameters are available in:
 
-| Setting | Default | Description |
-|---|---|---|
-| `VIDEO_SOURCE` | `0` | Webcam index or path to a video file |
-| `FRAME_WIDTH` | `1280` | Capture width |
-| `FRAME_HEIGHT` | `720` | Capture height |
-| `CONFIDENCE` | `0.45` | YOLO detection confidence threshold |
-| `SUDDEN_SPEED_THRESHOLD` | `18` | Pixel-per-frame speed change to trigger sudden movement |
-| `RISK_HIGH` | `70` | Risk score threshold for DANGER alert |
-| `CHAOS_HIGH` | `65` | Scene chaos score threshold for CHAOTIC label |
-
-To use a video file instead of a webcam, set `VIDEO_SOURCE = "path/to/video.mp4"`.
-
-## Project structure
-
+```bash
+config/config.py
 ```
+
+| Setting | Default | Purpose |
+|----------|----------|----------|
+| VIDEO_SOURCE | 0 | Webcam or video file |
+| FRAME_WIDTH | 1280 | Video width |
+| FRAME_HEIGHT | 720 | Video height |
+| CONFIDENCE | 0.45 | Detection confidence |
+| SUDDEN_SPEED_THRESHOLD | 18 | Sudden movement threshold |
+| RISK_HIGH | 70 | High risk alert threshold |
+| CHAOS_HIGH | 65 | Scene chaos threshold |
+
+Example:
+
+```python
+VIDEO_SOURCE = "video.mp4"
+```
+
+---
+
+## Project Structure
+
+```text
 insta-safe/
-├── main.py                    # Entry point
+│
+├── main.py
 ├── requirements.txt
+│
 ├── config/
-│   └── config.py              # All tunable parameters
+│   └── config.py
+│
 ├── modules/
-│   ├── tracker.py             # Centroid tracker
+│   ├── tracker.py
 │   ├── trajectory_analyzer.py
 │   ├── lane_analyzer.py
 │   ├── chaos_scorer.py
 │   ├── predictor.py
 │   └── alert_engine.py
-├── models/                    # Place yolov8n.pt here (auto-downloaded)
-└── assets/                    # Optional: test videos, screenshots
+│
+├── tests/
+│   ├── test_tracker.py
+│   ├── test_predictor.py
+│   └── test_alert_engine.py
+│
+├── models/
+│   └── yolov8n.pt
+│
+├── assets/
+│   ├── screenshots/
+│   └── videos/
+│
+└── README.md
 ```
 
-## Alerts
+---
 
-| Alert | Trigger |
-|---|---|
-| SUDDEN MOVEMENT | Speed change exceeds threshold in last few frames |
-| HIGH SPEED | Sustained speed above 1.5× sudden threshold |
-| ERRATIC PATH | Instability score above 25 |
-| SUDDEN STOP | Negative acceleration below −12 |
-| COLLISION RISK | Projected positions of two objects converge within 60px |
-| LANE CUT | Object reverses horizontal direction sharply |
-| PEDESTRIAN CROSSING | Person moves more horizontally than vertically |
-| WRONG DIRECTION | Object moves against expected traffic side |
+## Alert Types
 
-## Autor
+| Alert | Description |
+|---------|------------|
+| SUDDEN MOVEMENT | Rapid speed change detected |
+| HIGH SPEED | Vehicle exceeds safe threshold |
+| ERRATIC PATH | Unstable movement pattern |
+| SUDDEN STOP | Hard braking detected |
+| COLLISION RISK | Potential future collision |
+| LANE CUT | Sudden lane change |
+| PEDESTRIAN CROSSING | Pedestrian crossing vehicle path |
+| WRONG DIRECTION | Opposite traffic movement |
+
+---
+
+## Applications
+
+- Smart Cities
+- Traffic Monitoring
+- Road Safety Systems
+- Intelligent Transportation Systems
+- Autonomous Vehicle Research
+- ADAS Development
+- Computer Vision Projects
+- AI Surveillance
+
+---
+
+## Future Enhancements
+
+- Multi-camera support
+- Vehicle classification
+- Traffic density analytics
+- Cloud dashboard integration
+- Driver behaviour analysis
+- Number plate recognition
+- Edge AI deployment
+- Smart traffic signal integration
+
+---
+
+## Screenshots
+
+Add screenshots inside:
+
+```text
+assets/screenshots/
+```
+
+Example:
+
+```md
+### Dashboard
+
+![Dashboard](assets/screenshots/dashboard.png)
+
+### Risk Monitoring
+
+![Risk](assets/screenshots/risk_monitor.png)
+```
+
+---
+
+## Performance
+
+- Real-Time Processing
+- Lightweight Architecture
+- Low Hardware Requirements
+- Fast Object Tracking
+- Scalable Design
+
+---
+
+## Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a new branch
+3. Commit changes
+4. Push changes
+5. Open a Pull Request
+
+---
+
+## Author
+
+### Vishal Pitla
+
+B.Tech CSE (Artificial Intelligence)
+
+GitHub:
+https://github.com/vishal9519-vis
+
+LinkedIn:
+https://www.linkedin.com/
+
+---
+
+## License
+
+This project is released under the MIT License.
+
+---
