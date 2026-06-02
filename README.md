@@ -7,6 +7,7 @@
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![Tests](https://img.shields.io/badge/Tests-Pytest-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+![Tests](https://github.com/vishal9519-vis/Insta--safe/actions/workflows/main.yml/badge.svg)
 
 # InstaSafe AI
 
