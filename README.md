@@ -90,6 +90,4 @@ insta-safe/
 | PEDESTRIAN CROSSING | Person moves more horizontally than vertically |
 | WRONG DIRECTION | Object moves against expected traffic side |
 
-## Author
-
-**YOUR_USERNAME** — [github.com/YOUR_USERNAME/insta-safe](https://github.com/YOUR_USERNAME/insta-safe)
+## Autor
