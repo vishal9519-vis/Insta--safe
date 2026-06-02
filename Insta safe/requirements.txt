@@ -1,7 +1,0 @@
-# InstaSafe AI — Requirements
-# Install: pip install -r requirements.txt
-# YOLOv8 model (yolov8n.pt) auto-downloads on first run
-
-ultralytics>=8.2.0
-opencv-python>=4.9.0
-numpy>=1.26.0
