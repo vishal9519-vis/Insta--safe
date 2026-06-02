@@ -1,0 +1,1 @@
+# InstaSafe AI — config package
